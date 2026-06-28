@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SARAKSA Tour - Mewujudkan Ibadah Sempurna</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome & Swiper & AOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'space': '#0a0510',
+                        'deep-purple': '#15082b',
+                        'royal-purple': '#2d1057',
+                        'neon-purple': '#8b5cf6',
+                        'neon-gold': '#fbbf24',
+                        'soft-gold': '#fcd34d',
+                        'glass': 'rgba(255, 255, 255, 0.05)'
+                    },
+                    fontFamily: {
+                        'display': ['Clash Display', 'sans-serif'],
+                        'body': ['Outfit', 'sans-serif'],
+                        'serif': ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { --ease-lux: cubic-bezier(0.16, 1, 0.3, 1); }
+        * { -webkit-font-smoothing: antialiased; }
+        
+        html, body {
+            background-color: #0a0510; color: #e2e8f0;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden; cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot, .cursor-outline {
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; z-index: 9999; pointer-events: none;
+            transition: transform 0.15s ease-out, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+            mix-blend-mode: difference;
+        }
+        .cursor-dot { width: 8px; height: 8px; background: #fbbf24; }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid #8b5cf6; }
+        .cursor-grow { width: 80px; height: 80px; background: rgba(139, 92, 246, 0.2); border: none; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0510; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #8b5cf6, #fbbf24); border-radius: 10px; }
+        .modal-scroll::-webkit-scrollbar { width: 4px; }
+        .modal-scroll::-webkit-scrollbar-thumb { background: #fbbf24; }
+
+        /* Typography */
+        h1, h2, h3, h4 { font-family: 'Clash Display', sans-serif; }
+        .text-gradient-gold { background: linear-gradient(to right, #fbbf24, #fcd34d, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .text-gradient-purple { background: linear-gradient(to right, #8b5cf6, #c4b5fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* Glassmorphism & Effects */
+        .glass {
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-gold { background: rgba(251, 191, 36, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(251, 191, 36, 0.2); }
+        .glow-purple { box-shadow: 0 0 30px rgba(139, 92, 246, 0.3); }
+        .glow-gold { box-shadow: 0 0 30px rgba(251, 191, 36, 0.3); }
+
+        /* Blobs & Marquee */
+        .blob { position: absolute; border-radius: 50%; filter: blur(80px); z-index: 0; animation: blob-move 15s infinite alternate var(--ease-lux); }
+        @keyframes blob-move { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, -30px) scale(1.2); } }
+        .marquee-container { overflow: hidden; white-space: nowrap; }
+        .marquee-track { display: inline-block; animation: marquee 25s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Animations */
+        .float-anim { animation: floating 4s ease-in-out infinite; }
+        @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .ripple-btn { position: relative; overflow: hidden; }
+        .ripple-effect { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.4); transform: scale(0); animation: ripple 0.6s linear; pointer-events: none; }
+        @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+
+        /* Preloader */
+        #preloader { position: fixed; inset: 0; background: #0a0510; z-index: 10000; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
+        .loader-logo { font-family: 'Clash Display'; font-size: 4rem; font-weight: 700; background: linear-gradient(to right, #8b5cf6, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.95); } }
+
+        /* Swiper */
+        .swiper-pagination-bullet { background: #8b5cf6; opacity: 0.3; }
+        .swiper-pagination-bullet-active { background: #fbbf24; opacity: 1; width: 24px; border-radius: 4px; }
+
+        /* FAQ Accordion */
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s var(--ease-lux); }
+        .faq-item.active .faq-answer { max-height: 1000px; } 
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+        
+        .img-reveal { overflow: hidden; }
+        .img-reveal img { transition: transform 0.8s var(--ease-lux); }
+        .img-reveal:hover img { transform: scale(1.1); }
+    </style>
+</head>
+<body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="text-center">
+            <div class="loader-logo">SARAKSA</div>
+            <div class="mt-4 h-1 w-32 bg-gray-800 rounded-full overflow-hidden mx-auto">
+                <div class="h-full w-1/2 bg-gradient-to-r from-neon-purple to-neon-gold rounded-full animate-pulse"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- ================= FLOATING ELEMENTS & POPUPS ================= -->
+    <div id="welcome-popup" class="hidden fixed inset-0 z-[1000] bg-space/80 backdrop-blur-xl items-center justify-center p-4">
+        <div class="glass-gold max-w-lg w-full p-10 rounded-3xl relative overflow-hidden">
+            <button onclick="closeModal('welcome-popup')" class="absolute top-5 right-5 text-gray-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
+            <div class="text-center relative z-10">
+                <div class="text-6xl text-gradient-gold mb-4 font-display font-bold">Assalamu'alaikum</div>
+                <h3 class="text-2xl font-display text-white mb-3">Selamat Datang di SARAKSA Tour</h3>
+                <p class="text-gray-300 mb-8">Dapatkan pengalaman ibadah haji & umroh dengan pelayanan berkelas dan keberkahan tak terhingga. Daftar sekarang dan dapatkan promo eksklusif!</p>
+                <button onclick="closeModal('welcome-popup'); openModal('modal-daftar-manasik')" class="ripple-btn bg-gradient-to-r from-neon-purple to-royal-purple text-white px-8 py-4 rounded-full font-semibold hover:scale-105 transition-transform glow-purple">Lihat Promo Sekarang</button>
+            </div>
+            <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-neon-gold/20 rounded-full blur-2xl"></div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[999] glass-gold px-6 py-4 rounded-xl shadow-2xl border border-neon-gold/30 flex items-center space-x-3 opacity-0 translate-y-10 transition-all duration-500">
+        <i class="fas fa-check-circle text-neon-gold text-xl"></i>
+        <span class="text-white font-medium">Data berhasil terkirim! Tim kami akan segera menghubungi Anda.</span>
+    </div>
+
+    <div class="fixed bottom-8 right-8 z-50 flex flex-col space-y-4 items-end">
+        <button onclick="openModal('modal-survei')" class="hidden lg:flex w-14 h-14 rounded-full glass border border-white/10 items-center justify-center text-neon-gold hover:scale-110 transition-transform float-anim">
+            <i class="fas fa-poll-h text-xl"></i>
+        </button>
+        <a href="https://wa.me/6285150588008" class="w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white shadow-2xl hover:scale-110 transition-transform glow-purple">
+            <i class="fab fa-whatsapp text-3xl"></i>
+        </a>
+    </div>
+
+    <button id="back-to-top" class="fixed bottom-8 left-8 z-50 w-12 h-12 rounded-full glass border border-white/10 items-center justify-center text-white hover:bg-neon-purple transition-opacity opacity-0 invisible">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ================= NAVIGATION ================= -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-500 py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="#home" class="flex items-center space-x-3 group">
+                <div class="relative w-12 h-12 rounded-full overflow-hidden border-2 border-neon-gold/50 group-hover:border-neon-gold transition">
+                    <img src="https://z-cdn-media.chatglm.cn/files/44e1eada-6c39-4f47-b04c-e25d8b179bbf.jpeg?auth_key=1882612062-a5629342849b4f4a9fecadb5b2e47e64-0-2bcc6c11cca9b620b673f41f9771208d" class="w-full h-full object-cover" alt="Logo Saraksa">
+                </div>
+                <div class="hidden sm:block">
+                    <h1 class="font-display text-xl font-bold text-white tracking-wider">SARAKSA</h1>
+                    <p class="text-[10px] text-neon-gold tracking-[0.3em] -mt-1">TOUR</p>
+                </div>
+            </a>
+            
+            <div class="hidden lg:flex items-center space-x-8 glass px-6 py-3 rounded-full">
+                <a href="#home" class="text-sm text-gray-300 hover:text-neon-gold transition">Beranda</a>
+                <a href="#program" class="text-sm text-gray-300 hover:text-neon-gold transition">Program</a>
+                <a href="#manasik" class="text-sm text-gray-300 hover:text-neon-gold transition">Manasik</a>
+                <a href="#struktur" class="text-sm text-gray-300 hover:text-neon-gold transition">Tim Kami</a>
+                <a href="#gallery" class="text-sm text-gray-300 hover:text-neon-gold transition">Galeri</a>
+                <a href="#faq" class="text-sm text-gray-300 hover:text-neon-gold transition">FAQ</a>
+            </div>
+
+            <button onclick="openModal('modal-daftar-manasik')" class="hidden lg:flex ripple-btn bg-gradient-to-r from-neon-gold to-soft-gold text-space px-6 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform glow-gold items-center space-x-2">
+                <i class="fas fa-rocket"></i> <span>Mulai Perjalanan</span>
+            </button>
+            <button id="menu-btn" class="lg:hidden text-white text-2xl"><i class="fas fa-bars"></i></button>
+        </div>
+        
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 right-0 bg-space/95 backdrop-blur-xl border-t border-white/10 py-6 px-6">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="text-gray-300 hover:text-neon-gold">Beranda</a>
+                <a href="#program" class="text-gray-300 hover:text-neon-gold">Program</a>
+                <a href="#manasik" class="text-gray-300 hover:text-neon-gold">Manasik</a>
+                <a href="#struktur" class="text-gray-300 hover:text-neon-gold">Tim Kami</a>
+                <a href="#gallery" class="text-gray-300 hover:text-neon-gold">Galeri</a>
+                <a href="#faq" class="text-gray-300 hover:text-neon-gold">FAQ</a>
+                <button onclick="openModal('modal-daftar-manasik')" class="bg-neon-gold text-space px-6 py-3 rounded-full font-bold text-center mt-4">Daftar Sekarang</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <div class="blob w-[500px] h-[500px] bg-neon-purple/20 top-0 -left-20"></div>
+        <div class="blob w-[400px] h-[400px] bg-neon-gold/10 bottom-0 right-0" style="animation-delay: 2s;"></div>
+        <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 50px 50px;"></div>
+
+        <div class="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+            <div data-aos="fade-right" data-aos-duration="1200">
+                <div class="inline-flex items-center space-x-2 glass-gold px-4 py-2 rounded-full mb-6">
+                    <span class="w-2 h-2 bg-neon-gold rounded-full animate-pulse"></span>
+                    <span class="text-xs font-medium text-neon-gold tracking-wider">MELAYANI DENGAN AMANAH</span>
+                </div>
+                <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.9] mb-6 text-white">
+                    Wujudkan<br><span class="text-gradient-gold">Ibadah</span><br>Sempurna.
+                </h1>
+                <p class="text-gray-400 text-lg max-w-md mb-10 leading-relaxed">Pengalaman Haji & Umroh premium dengan pembimbingan profesional, fasilitas mewah, dan ketenangan batin. Perjalanan nyaman penuh keberkahan bersama SARAKSA Tour.</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button onclick="openModal('modal-daftar-manasik')" class="ripple-btn bg-gradient-to-r from-neon-gold to-soft-gold text-space px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform glow-gold flex items-center justify-center space-x-2">
+                        <i class="fas fa-user-plus"></i> <span>Daftar Program</span>
+                    </button>
+                    <button onclick="openModal('modal-jadwal-manasik')" class="glass border border-white/20 text-white px-8 py-4 rounded-full font-medium hover:bg-white/10 transition flex items-center justify-center space-x-2">
+                        <i class="far fa-calendar-alt"></i> <span>Lihat Jadwal</span>
+                    </button>
+                </div>
+                <div class="grid grid-cols-3 gap-6 mt-12 max-w-md">
+                    <div><div class="text-3xl font-display font-bold text-white counter" data-target="120">0</div><div class="text-xs text-gray-500 mt-1">Kapasitas Kloter</div></div>
+                    <div><div class="text-3xl font-display font-bold text-white counter" data-target="16">0</div><div class="text-xs text-gray-500 mt-1">Pertemuan Manasik</div></div>
+                    <div><div class="text-3xl font-display font-bold text-white counter" data-target="100">0</div><div class="text-xs text-gray-500 mt-1">% Amanah</div></div>
+                </div>
+            </div>
+            <div class="relative hidden lg:block" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                <div class="relative w-full h-[600px]">
+                    <div class="absolute top-0 right-0 w-3/4 h-[500px] rounded-[40px] overflow-hidden glass border border-white/10 z-20" data-parallax="0.1">
+                        <img src="https://z-cdn-media.chatglm.cn/files/fd8174eb-47b9-4f41-86ac-2aaa379e3620.jpg?auth_key=1882618436-da683f38f4034d1e8ce1a43bb42f16c5-0-685cc44c58233caf43f72381e4c55f95" class="w-full h-full object-cover" alt="Kaaba Mecca">
+                        <div class="absolute inset-0 bg-gradient-to-t from-space/80 to-transparent"></div>
+                    </div>
+                    <div class="absolute bottom-10 left-0 glass p-6 rounded-2xl w-64 z-30 float-anim glow-purple" data-parallax="-0.2">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-purple to-royal-purple flex items-center justify-center text-white"><i class="fas fa-book-open"></i></div>
+                            <div><h4 class="text-white font-semibold text-sm">Program AMARTYA</h4><p class="text-gray-400 text-xs">Bimbingan Terpadu</p></div>
+                        </div>
+                    </div>
+                    <div class="absolute top-20 left-0 glass-gold p-4 rounded-2xl z-30 float-anim glow-gold" style="animation-delay: 1s;" data-parallax="0.3">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-star text-neon-gold"></i><i class="fas fa-star text-neon-gold"></i><i class="fas fa-star text-neon-gold"></i><i class="fas fa-star text-neon-gold"></i><i class="fas fa-star text-neon-gold"></i>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1">Rating Kepuasan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center text-gray-400">
+            <span class="text-xs mb-2 tracking-widest">SCROLL</span>
+            <div class="w-px h-12 bg-gradient-to-b from-neon-gold to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- ================= INFINITE MARQUEE ================= -->
+    <section class="py-8 bg-deep-purple border-y border-white/5 overflow-hidden">
+        <div class="marquee-container">
+            <div class="marquee-track flex items-center space-x-12">
+                <span class="font-display text-2xl text-white opacity-50">Makkah</span><i class="fas fa-star text-neon-gold text-sm"></i>
+                <span class="font-display text-2xl text-white opacity-50">Madinah</span><i class="fas fa-star text-neon-gold text-sm"></i>
+                <span class="font-display text-2xl text-white opacity-50">AMARTYA</span><i class="fas fa-star text-neon-gold text-sm"></i>
+                <span class="font-display text-2xl text-white opacity-50">Amanah</span><i class="fas fa-star text-neon-gold text-sm"></i>
+                <span class="font-display text-2xl text-white opacity-50">Berkah</span><i class="fas fa-star text-neon-gold text-sm"></i>
+                <span class="font-display text-2xl text-white opacity-50">Nyaman</span><i class="fas fa-star text-neon-gold text-sm"></i>
+                <span class="font-display text-2xl text-white opacity-50">Makkah</span><i class="fas fa-star text-neon-gold text-sm"></i>
+                <span class="font-display text-2xl text-white opacity-50">Madinah</span><i class="fas fa-star text-neon-gold text-sm"></i>
+                <span class="font-display text-2xl text-white opacity-50">AMARTYA</span><i class="fas fa-star text-neon-gold text-sm"></i>
+                <span class="font-display text-2xl text-white opacity-50">Amanah</span><i class="fas fa-star text-neon-gold text-sm"></i>
+                <span class="font-display text-2xl text-white opacity-50">Berkah</span><i class="fas fa-star text-neon-gold text-sm"></i>
+                <span class="font-display text-2xl text-white opacity-50">Nyaman</span><i class="fas fa-star text-neon-gold text-sm"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= BENTO GRID PROGRAM SECTION ================= -->
+    <section id="program" class="py-32 relative">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16" data-aos="fade-up">
+                <div>
+                    <span class="text-neon-gold text-sm font-medium tracking-widest">PROGRAM UNGGULAN</span>
+                    <h2 class="font-display text-5xl md:text-6xl font-bold text-white mt-2 max-w-xl">Pilihan Pakar <span class="text-gradient-gold">Eksklusif</span></h2>
+                </div>
+                <p class="text-gray-400 max-w-sm mt-6 md:mt-0">Setiap paket dirancang khusus untuk memberikan pengalaman spiritual tanpa kompromi.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[180px] md:auto-rows-[250px]">
+                <div class="col-span-2 row-span-2 glass rounded-3xl overflow-hidden relative group img-reveal cursor-pointer" onclick="openModal('modal-program')">
+                    <img src="https://z-cdn-media.chatglm.cn/files/01623f88-9d4c-43ae-bcda-5a179282d75a.jpg?auth_key=1882618436-70a4ffce12da488c9baf64b6a096116f-0-61e8adb2c4d60178c3bdbf5bb0dec3cf" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Umroh Plus Turki">
+                    <div class="absolute inset-0 bg-gradient-to-t from-space via-space/40 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6 md:p-8 z-10">
+                        <span class="glass-gold text-neon-gold text-xs px-3 py-1 rounded-full mb-3 inline-block">POPULER</span>
+                        <h3 class="font-display text-3xl md:text-4xl text-white mb-2">Umroh Plus Turki</h3>
+                        <p class="text-gray-300 text-sm md:text-base max-w-md">Kombinasi ibadah umroh dengan wisata religi ke Istanbul. Pengalaman budaya dan spiritual yang tak terlupakan.</p>
+                    </div>
+                </div>
+                <div class="col-span-2 row-span-1 glass rounded-3xl overflow-hidden relative group img-reveal cursor-pointer" onclick="openModal('modal-program')">
+                    <img src="https://z-cdn-media.chatglm.cn/files/f8cd6f41-5d8f-4cf3-ad44-edb32a0ee545.jpg?auth_key=1882618436-ae9668873cbe45e38e836e9b60ba4f35-0-847567b1fd1dbfa6d55eed0725545d9c" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Umroh Reguler">
+                    <div class="absolute inset-0 bg-gradient-to-r from-space via-space/60 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6 md:p-8 z-10 w-full">
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <h3 class="font-display text-xl md:text-2xl text-white mb-1">Umroh Reguler</h3>
+                                <p class="text-gray-300 text-xs md:text-sm">Jadwal teratur, hotel bintang 4.</p>
+                            </div>
+                            <span class="text-neon-gold font-bold text-lg md:text-xl">25Jt</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-1 row-span-1 glass rounded-3xl overflow-hidden relative group img-reveal cursor-pointer" onclick="openModal('modal-program')">
+                    <img src="https://z-cdn-media.chatglm.cn/files/bd26e55f-e3f1-476c-887c-676525a1ccdf.jpeg?auth_key=1882618436-fcab10109dd84a0b810366477fe5c153-0-89a327602317a31249d6a979b0805937" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Private VIP">
+                    <div class="absolute inset-0 bg-gradient-to-t from-space via-space/40 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-4 md:p-6 z-10">
+                        <h3 class="font-display text-base md:text-xl text-white">Private VIP</h3>
+                        <p class="text-gray-300 text-[10px] md:text-xs mt-1">Eksklusif</p>
+                    </div>
+                </div>
+                <div class="col-span-1 row-span-1 glass rounded-3xl overflow-hidden relative group img-reveal cursor-pointer" onclick="openModal('modal-program')">
+                    <img src="https://z-cdn-media.chatglm.cn/files/7456278e-e758-4ce2-8a3f-28405d2d2353.jpg?auth_key=1882618436-f3fb2ac034c64f238ce4b8c56dc0d15d-0-e7ecaefdaec6826483e2d749c8d13b1f" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Ramadhan">
+                    <div class="absolute inset-0 bg-gradient-to-t from-space via-space/40 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-4 md:p-6 z-10">
+                        <h3 class="font-display text-base md:text-xl text-white">Ramadhan</h3>
+                        <p class="text-gray-300 text-[10px] md:text-xs mt-1">Berkhusus</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= MANASIK AMARTYA TIMELINE ================= -->
+    <section id="manasik" class="py-32 bg-deep-purple relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-neon-purple/10 rounded-full blur-[100px]"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-24" data-aos="fade-up">
+                <span class="text-neon-gold text-sm font-medium tracking-widest">PROGRAM AMARTYA</span>
+                <h2 class="font-display text-4xl md:text-6xl font-bold text-white mt-2">Kurikulum 16 Pertemuan <span class="text-gradient-purple">Manasik</span></h2>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Metode Micro-Coaching dan Sistem Kloter Kecil untuk memastikan kesiapan fisik dan mental jamaah.</p>
+            </div>
+
+            <div class="relative max-w-4xl mx-auto">
+                <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-neon-purple via-neon-gold to-transparent"></div>
+
+                <div class="relative flex items-center mb-16" data-aos="fade-right">
+                    <div class="absolute left-8 md:left-1/2 w-4 h-4 bg-neon-purple rounded-full -translate-x-1/2 glow-purple z-10"></div>
+                    <div class="md:w-1/2 md:pr-12 pl-20 md:pl-0 md:text-right">
+                        <div class="glass p-6 rounded-2xl hover:border-neon-purple border border-transparent transition cursor-pointer" onclick="openModal('modal-manasik-detail')">
+                            <span class="text-xs font-bold text-neon-gold tracking-widest">FASE 1 (PERTEMUAN 1-3)</span>
+                            <h3 class="font-display text-xl md:text-2xl text-white mb-2 mt-1">Fondasi Regulasi & Administrasi</h3>
+                            <p class="text-gray-400 text-sm">Orientasi AMARTYA, regulasi umrah kontemporer, dan manajemen dokumen perjalanan.</p>
+                            <button class="text-neon-gold text-sm mt-3 hover:underline">Lihat Detail Kurikulum <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative flex items-center mb-16" data-aos="fade-left">
+                    <div class="absolute left-8 md:left-1/2 w-4 h-4 bg-neon-gold rounded-full -translate-x-1/2 glow-gold z-10"></div>
+                    <div class="md:w-1/2 md:pl-12 pl-20 md:ml-auto">
+                        <div class="glass p-6 rounded-2xl hover:border-neon-gold border border-transparent transition cursor-pointer" onclick="openModal('modal-manasik-detail')">
+                            <span class="text-xs font-bold text-neon-gold tracking-widest">FASE 2 (PERTEMUAN 4-7)</span>
+                            <h3 class="font-display text-xl md:text-2xl text-white mb-2 mt-1">Pendalaman Teori Fikih & Mental</h3>
+                            <p class="text-gray-400 text-sm">Kupas tuntas fikih umrah, larangan ihram, pelafalan doa, hingga kesiagaan medis & fisik.</p>
+                            <button class="text-neon-gold text-sm mt-3 hover:underline">Lihat Detail Kurikulum <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative flex items-center mb-16" data-aos="fade-right">
+                    <div class="absolute left-8 md:left-1/2 w-4 h-4 bg-neon-purple rounded-full -translate-x-1/2 glow-purple z-10"></div>
+                    <div class="md:w-1/2 md:pr-12 pl-20 md:pl-0 md:text-right">
+                        <div class="glass p-6 rounded-2xl hover:border-neon-purple border border-transparent transition cursor-pointer" onclick="openModal('modal-manasik-detail')">
+                            <span class="text-xs font-bold text-neon-gold tracking-widest">FASE 3 (PERTEMUAN 8-11)</span>
+                            <h3 class="font-display text-xl md:text-2xl text-white mb-2 mt-1">Simulasi Teknis Lapangan Parsial</h3>
+                            <p class="text-gray-400 text-sm">Praktik kain ihram, simulasi Thawaf, Sa'i, hingga simulasi penerbangan dan adab hotel.</p>
+                            <button class="text-neon-gold text-sm mt-3 hover:underline">Lihat Detail Kurikulum <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative flex items-center" data-aos="fade-left">
+                    <div class="absolute left-8 md:left-1/2 w-4 h-4 bg-neon-gold rounded-full -translate-x-1/2 glow-gold z-10"></div>
+                    <div class="md:w-1/2 md:pl-12 pl-20 md:ml-auto">
+                        <div class="glass p-6 rounded-2xl hover:border-neon-gold border border-transparent transition cursor-pointer" onclick="openModal('modal-manasik-detail')">
+                            <span class="text-xs font-bold text-neon-gold tracking-widest">FASE 4 (PERTEMUAN 12-16)</span>
+                            <h3 class="font-display text-xl md:text-2xl text-white mb-2 mt-1">Simulasi Akbar & Evaluasi</h3>
+                            <p class="text-gray-400 text-sm">Geladi resik utuh, uji kompetensi, micro-coaching pemantapan, hingga Walimatussafar.</p>
+                            <button class="text-neon-gold text-sm mt-3 hover:underline">Lihat Detail Kurikulum <i class="fas fa-arrow-right ml-1 text-xs"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= VISI MISI TUJUAN (RESPONSIVE PREMIUM BENTO) ================= -->
+    <section id="visi-misi" class="py-32 relative overflow-hidden">
+        <div class="blob w-[500px] h-[500px] bg-neon-gold/10 top-1/2 left-0 -translate-y-1/2"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <span class="text-neon-gold text-sm font-medium tracking-widest">FILOSOFI KAMI</span>
+                <h2 class="font-display text-4xl md:text-6xl font-bold text-white mt-2">Visi, Misi & <span class="text-gradient-gold">Tujuan</span></h2>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Dasar pijakan kami dalam melayani jamaah dengan sepenuh hati.</p>
+            </div>
+
+            <!-- Grid Layout Mobile Fix -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-auto md:auto-rows-[250px]">
+                
+                <!-- Visi (Takes full width on mobile, half width & tall on desktop) -->
+                <div class="col-span-1 md:col-span-2 md:row-span-2 glass-gold rounded-3xl p-8 md:p-10 flex flex-col justify-between relative overflow-hidden group hover:border-neon-gold transition-all duration-500" data-aos="zoom-in-up">
+                    <div class="absolute -top-20 -right-20 w-60 h-60 bg-neon-gold/10 rounded-full blur-3xl group-hover:scale-150 transition duration-700"></div>
+                    <div class="relative z-10">
+                        <div class="inline-block glass px-4 py-2 rounded-full text-neon-gold text-xs tracking-widest mb-6">VISI</div>
+                        <i class="fas fa-eye text-neon-gold text-3xl md:text-4xl mb-4 md:mb-6 block"></i>
+                        <h3 class="font-display text-2xl md:text-4xl text-white leading-tight">Menjadi mitra setia dan terpercaya dalam setiap langkah perjalanan suci Anda.</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm relative z-10 mt-6">Komitmen kami adalah memastikan setiap detik perjalanan dipenuhi dengan ketenangan dan keberkahan.</p>
+                </div>
+
+                <!-- Misi Cards (Stack neatly on mobile, form 2x2 grid on desktop right side) -->
+                <div class="col-span-1 glass rounded-3xl p-6 flex flex-col justify-between hover:bg-white/5 transition-all duration-500 md:hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="100">
+                    <i class="fas fa-shield-heart text-neon-purple text-2xl mb-4 md:mb-0"></i>
+                    <div><h4 class="text-white font-semibold text-lg mb-1">Melindungi Sepenuh Hati</h4><p class="text-gray-400 text-sm">Menjaga kepercayaan jamaah dengan prioritas utama.</p></div>
+                </div>
+                <div class="col-span-1 glass rounded-3xl p-6 flex flex-col justify-between hover:bg-white/5 transition-all duration-500 md:hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="200">
+                    <i class="fas fa-lock text-neon-purple text-2xl mb-4 md:mb-0"></i>
+                    <div><h4 class="text-white font-semibold text-lg mb-1">Pelayanan Aman</h4><p class="text-gray-400 text-sm">Memberikan rasa aman dan terjamin sepanjang perjalanan.</p></div>
+                </div>
+                <div class="col-span-1 glass rounded-3xl p-6 flex flex-col justify-between hover:bg-white/5 transition-all duration-500 md:hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="300">
+                    <i class="fas fa-mosque text-neon-purple text-2xl mb-4 md:mb-0"></i>
+                    <div><h4 class="text-white font-semibold text-lg mb-1">Kegamaan Nyaman</h4><p class="text-gray-400 text-sm">Menciptakan suasana religius yang mendalam dan damai.</p></div>
+                </div>
+                <div class="col-span-1 glass rounded-3xl p-6 flex flex-col justify-between hover:bg-white/5 transition-all duration-500 md:hover:-translate-y-2" data-aos="zoom-in" data-aos-delay="400">
+                    <i class="fas fa-map-signs text-neon-purple text-2xl mb-4 md:mb-0"></i>
+                    <div><h4 class="text-white font-semibold text-lg mb-1">Bimbingan Bermakna</h4><p class="text-gray-400 text-sm">Panduan ibadah yang menyentuh hati dan bermakna.</p></div>
+                </div>
+
+                <!-- Tujuan (Full width bottom banner) -->
+                <div class="col-span-1 md:col-span-4 glass rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between relative overflow-hidden group" data-aos="fade-up" data-aos-delay="500">
+                    <div class="absolute inset-0 bg-gradient-to-r from-neon-purple/10 to-transparent z-0"></div>
+                    <div class="relative z-10 mb-4 md:mb-0 text-center md:text-left">
+                        <div class="inline-block glass px-4 py-1 rounded-full text-neon-gold text-xs tracking-widest mb-3">TUJUAN</div>
+                        <h3 class="font-display text-xl md:text-3xl text-white max-w-2xl">Menciptakan pengalaman ibadah haji & umroh yang amanah, nyaman, dan penuh keberkahan.</h3>
+                    </div>
+                    <div class="relative z-10 text-5xl md:text-6xl text-neon-purple/30 float-anim"><i class="fas fa-kaaba"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= STRUKTUR ORGANISASI (SPLIT LAYOUT PREMIUM) ================= -->
+    <section id="struktur" class="py-32 bg-deep-purple relative overflow-hidden">
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-neon-gold/10 rounded-full blur-[100px]"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Image Frame (Left) -->
+                <div data-aos="fade-right" class="relative">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-neon-purple/30 to-neon-gold/30 rounded-3xl blur-2xl opacity-50"></div>
+                    <div class="relative glass rounded-3xl p-2 border border-white/10 shadow-2xl">
+                        <div class="absolute -top-4 -left-4 w-20 h-20 border-t-4 border-l-4 border-neon-gold rounded-tl-3xl z-10"></div>
+                        <div class="absolute -bottom-4 -right-4 w-20 h-20 border-b-4 border-r-4 border-neon-purple rounded-br-3xl z-10"></div>
+                        <img src="https://z-cdn-media.chatglm.cn/files/0d7a2681-28bc-48a2-9a07-4d3a91ad1ec8.jpeg?auth_key=1882617133-a308ff3f356c41f2bbb3405e733a4219-0-240677af95e8c7f4e3a1023e2551a618" alt="Struktur Organisasi Saraksa Tour" class="rounded-2xl w-full h-auto object-cover">
+                    </div>
+                </div>
+
+                <!-- Content (Right) -->
+                <div data-aos="fade-left">
+                    <span class="text-neon-gold text-sm font-medium tracking-widest">TIM PROFESIONAL</span>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-white mt-2 mb-6">Struktur <span class="text-gradient-gold">Organisasi</span></h2>
+                    <p class="text-gray-400 mb-10 leading-relaxed">Didukung oleh tim yang berpengalaman dan berdedikasi tinggi di bidangnya masing-masing. Kami bekerja sama memastikan setiap detail operasional dan kenyamanan jamaah terpenuhi dengan standar tertinggi.</p>
+
+                    <div class="space-y-4">
+                        <!-- Direktur -->
+                        <div class="glass-gold p-5 rounded-2xl flex items-center space-x-5 hover:translate-x-2 transition-transform duration-300 cursor-pointer">
+                            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-neon-gold to-soft-gold flex items-center justify-center font-bold text-space text-xl shadow-lg">R</div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg">Rizal Kastawibawa</h4>
+                                <p class="text-neon-gold text-xs uppercase tracking-widest font-medium">Pimpinan / Direktur Operasional</p>
+                            </div>
+                            <i class="fas fa-user-tie text-neon-gold/30 text-2xl ml-auto hidden sm:block"></i>
+                        </div>
+
+                        <!-- Divisi Grid -->
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div class="glass p-4 rounded-2xl flex items-center space-x-4 hover:scale-105 transition-transform cursor-pointer">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-purple to-royal-purple flex items-center justify-center font-bold text-white text-lg">R</div>
+                                <div>
+                                    <h4 class="text-white text-sm font-semibold">Rabiansyah Akbar</h4>
+                                    <p class="text-gray-400 text-xs">Muthawif Utama</p>
+                                </div>
+                            </div>
+                            <div class="glass p-4 rounded-2xl flex items-center space-x-4 hover:scale-105 transition-transform cursor-pointer">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-purple to-royal-purple flex items-center justify-center font-bold text-white text-lg">R</div>
+                                <div>
+                                    <h4 class="text-white text-sm font-semibold">Rizal Kastawibawa</h4>
+                                    <p class="text-gray-400 text-xs">Muthawif</p>
+                                </div>
+                            </div>
+                            <div class="glass p-4 rounded-2xl flex items-center space-x-4 hover:scale-105 transition-transform cursor-pointer">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-gold to-soft-gold flex items-center justify-center font-bold text-space text-lg">D</div>
+                                <div>
+                                    <h4 class="text-white text-sm font-semibold">Diva Shaffira I.K.</h4>
+                                    <p class="text-gray-400 text-xs">Administrasi & Kesekretariatan</p>
+                                </div>
+                            </div>
+                            <div class="glass p-4 rounded-2xl flex items-center space-x-4 hover:scale-105 transition-transform cursor-pointer">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-purple to-royal-purple flex items-center justify-center font-bold text-white text-lg">E</div>
+                                <div>
+                                    <h4 class="text-white text-sm font-semibold">Euis Siti Suwangsih</h4>
+                                    <p class="text-gray-400 text-xs">Tenaga Kesehatan</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Logistik -->
+                        <div class="glass p-4 rounded-2xl flex items-center space-x-4 hover:scale-[1.02] transition-transform cursor-pointer">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-gold to-soft-gold flex items-center justify-center font-bold text-space text-lg">F</div>
+                            <div>
+                                <h4 class="text-white text-sm font-semibold">Fiqri Syaukani</h4>
+                                <p class="text-gray-400 text-xs">Logistik, Perlengkapan & Keamanan</p>
+                            </div>
+                            <i class="fas fa-truck-loading text-neon-gold/30 text-xl ml-auto hidden sm:block"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TESTIMONIALS CAROUSEL ================= -->
+    <section id="testimonials" class="py-32 overflow-hidden">
+        <div class="container mx-auto px-6 mb-12">
+            <div class="text-center" data-aos="fade-up">
+                <span class="text-neon-gold text-sm font-medium tracking-widest">CERITA MEREKA</span>
+                <h2 class="font-display text-4xl md:text-6xl font-bold text-white mt-2">Kata <span class="text-gradient-gold">Jamaah</span></h2>
+            </div>
+        </div>
+        <div class="swiper testimonialSwiper px-6 pb-12" data-aos="zoom-in">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="glass p-8 rounded-3xl h-full md:h-[300px] flex flex-col justify-between">
+                        <div><i class="fas fa-quote-left text-neon-purple text-3xl mb-4 opacity-50"></i><p class="text-gray-300 text-lg leading-relaxed">"Pelayanan SARAKSA Tour luar biasa. Pembimbingnya sabar dan sangat membantu. Pengalaman umroh pertama saya sangat berkesan."</p></div>
+                        <div class="flex items-center mt-6">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-purple to-royal-purple flex items-center justify-center font-bold text-white text-lg">A</div>
+                            <div class="ml-4"><h4 class="text-white font-semibold">Ahmad Fauzi</h4><p class="text-gray-500 text-sm">Jamaah Umroh Plus Turki</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="glass p-8 rounded-3xl h-full md:h-[300px] flex flex-col justify-between">
+                        <div><i class="fas fa-quote-left text-neon-gold text-3xl mb-4 opacity-50"></i><p class="text-gray-300 text-lg leading-relaxed">"Hotelnya dekat dengan masjid, makanannya enak, dan manasiknya terstruktur. Terima kasih SARAKSA, pelayanan terbaik!"</p></div>
+                        <div class="flex items-center mt-6">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-gold to-soft-gold flex items-center justify-center font-bold text-space text-lg">S</div>
+                            <div class="ml-4"><h4 class="text-white font-semibold">Siti Aminah</h4><p class="text-gray-500 text-sm">Jamaah Umroh Reguler</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="glass p-8 rounded-3xl h-full md:h-[300px] flex flex-col justify-between">
+                        <div><i class="fas fa-quote-left text-neon-purple text-3xl mb-4 opacity-50"></i><p class="text-gray-300 text-lg leading-relaxed">"Buku bimbingan digitalnya sangat membantu. Bisa diakses kapan saja. Tim SARAKSA sangat responsif. Recommended!"</p></div>
+                        <div class="flex items-center mt-6">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-purple to-royal-purple flex items-center justify-center font-bold text-white text-lg">R</div>
+                            <div class="ml-4"><h4 class="text-white font-semibold">Rizal Kastawibawa</h4><p class="text-gray-500 text-sm">Jamaah Haji Khusus</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination mt-8"></div>
+        </div>
+    </section>
+
+    <!-- ================= GALLERY MASONRY ================= -->
+    <section id="gallery" class="py-32 bg-deep-purple relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-neon-gold text-sm font-medium tracking-widest">MOMEN BERKAH</span>
+                <h2 class="font-display text-4xl md:text-6xl font-bold text-white mt-2">Galeri <span class="text-gradient-purple">Kegiatan</span></h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[150px] md:auto-rows-[200px]">
+                <div class="col-span-1 row-span-2 rounded-2xl overflow-hidden img-reveal cursor-pointer group relative" onclick="openLightbox('https://z-cdn-media.chatglm.cn/files/8ae0eb95-3c4e-4037-b670-ff1bd2c980f8.jpg?auth_key=1882618436-ceb00cb101ce4d2dbc2e9ab2399f0291-0-6433f0f3f46012821365bfd6a6926229')" data-aos="zoom-in">
+                    <img src="https://z-cdn-media.chatglm.cn/files/8ae0eb95-3c4e-4037-b670-ff1bd2c980f8.jpg?auth_key=1882618436-ceb00cb101ce4d2dbc2e9ab2399f0291-0-6433f0f3f46012821365bfd6a6926229" class="w-full h-full object-cover" alt="Masjid Nabawi Madinah">
+                    <div class="absolute inset-0 bg-space/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="col-span-1 row-span-1 rounded-2xl overflow-hidden img-reveal cursor-pointer group relative" onclick="openLightbox('https://z-cdn-media.chatglm.cn/files/a306180d-5104-439f-91ac-dbc850dee38c.jpg?auth_key=1882618436-fb64eb1e56d64b3e985ff02a5bc010dd-0-42949146cbe33319cd7027728b453661')" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://z-cdn-media.chatglm.cn/files/a306180d-5104-439f-91ac-dbc850dee38c.jpg?auth_key=1882618436-fb64eb1e56d64b3e985ff02a5bc010dd-0-42949146cbe33319cd7027728b453661" class="w-full h-full object-cover" alt="Kubah Hijau Masjid Nabawi">
+                    <div class="absolute inset-0 bg-space/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="col-span-1 row-span-1 rounded-2xl overflow-hidden img-reveal cursor-pointer group relative" onclick="openLightbox('https://z-cdn-media.chatglm.cn/files/f8cd6f41-5d8f-4cf3-ad44-edb32a0ee545.jpg?auth_key=1882618436-ae9668873cbe45e38e836e9b60ba4f35-0-847567b1fd1dbfa6d55eed0725545d9c')" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://z-cdn-media.chatglm.cn/files/f8cd6f41-5d8f-4cf3-ad44-edb32a0ee545.jpg?auth_key=1882618436-ae9668873cbe45e38e836e9b60ba4f35-0-847567b1fd1dbfa6d55eed0725545d9c" class="w-full h-full object-cover" alt="Sholat di Masjid">
+                    <div class="absolute inset-0 bg-space/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="col-span-1 row-span-2 rounded-2xl overflow-hidden img-reveal cursor-pointer group relative" onclick="openLightbox('https://z-cdn-media.chatglm.cn/files/7456278e-e758-4ce2-8a3f-28405d2d2353.jpg?auth_key=1882618436-f3fb2ac034c64f238ce4b8c56dc0d15d-0-e7ecaefdaec6826483e2d749c8d13b1f')" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="https://z-cdn-media.chatglm.cn/files/7456278e-e758-4ce2-8a3f-28405d2d2353.jpg?auth_key=1882618436-f3fb2ac034c64f238ce4b8c56dc0d15d-0-e7ecaefdaec6826483e2d749c8d13b1f" class="w-full h-full object-cover" alt="Kaaba Malam Hari">
+                    <div class="absolute inset-0 bg-space/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="col-span-2 row-span-1 rounded-2xl overflow-hidden img-reveal cursor-pointer group relative" onclick="openLightbox('https://z-cdn-media.chatglm.cn/files/fd8174eb-47b9-4f41-86ac-2aaa379e3620.jpg?auth_key=1882618436-da683f38f4034d1e8ce1a43bb42f16c5-0-685cc44c58233caf43f72381e4c55f95')" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="https://z-cdn-media.chatglm.cn/files/fd8174eb-47b9-4f41-86ac-2aaa379e3620.jpg?auth_key=1882618436-da683f38f4034d1e8ce1a43bb42f16c5-0-685cc44c58233caf43f72381e4c55f95" class="w-full h-full object-cover" alt="Kaaba Sore Hari">
+                    <div class="absolute inset-0 bg-space/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FAQ ACCORDION ================= -->
+    <section id="faq" class="py-32 container mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+            <div data-aos="fade-right">
+                <span class="text-neon-gold text-sm font-medium tracking-widest">PERTANYAAN UMUM</span>
+                <h2 class="font-display text-4xl md:text-6xl font-bold text-white mt-2 mb-6">Hal yang <span class="text-gradient-gold">Sering Ditanya</span></h2>
+                <p class="text-gray-400 mb-8">Tidak menemukan jawaban yang Anda cari? Hubungi tim kami untuk informasi lebih lanjut.</p>
+                <button onclick="openModal('modal-quick-contact')" class="ripple-btn bg-gradient-to-r from-neon-purple to-royal-purple text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-transform glow-purple inline-flex items-center space-x-2">
+                    <i class="fas fa-headset"></i> <span>Hubungi CS</span>
+                </button>
+            </div>
+            <div class="space-y-4" data-aos="fade-left">
+                <div class="faq-item glass rounded-2xl overflow-hidden border border-white/5">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
+                        <span class="text-white font-medium text-base md:text-lg">Berapa lama proses pendaftaran Umroh?</span>
+                        <i class="fas fa-plus faq-icon text-neon-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer"><p class="px-6 pb-6 text-gray-400 text-sm">Proses pendaftaran sangat cepat, hanya membutuhkan waktu 1x24 jam setelah dokumen lengkap. Tim kami akan memandu Anda hingga visa terbit.</p></div>
+                </div>
+                <div class="faq-item glass rounded-2xl overflow-hidden border border-white/5">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
+                        <span class="text-white font-medium text-base md:text-lg">Apakah ada bimbingan manasik online?</span>
+                        <i class="fas fa-plus faq-icon text-neon-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer"><p class="px-6 pb-6 text-gray-400 text-sm">Ya, kami menyediakan bimbingan manasik tatap muka dan online melalui platform digital. Anda juga dapat mengunduh buku panduan digital kami.</p></div>
+                </div>
+                <div class="faq-item glass rounded-2xl overflow-hidden border border-white/5">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
+                        <span class="text-white font-medium text-base md:text-lg">Bagaimana jika ada jamaah yang sakit di tanah suci?</span>
+                        <i class="fas fa-plus faq-icon text-neon-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer"><p class="px-6 pb-6 text-gray-400 text-sm">Kami menyediakan tenaga kesehatan profesional yang mendampingi rombongan selama di tanah suci, serta asuransi perjalanan untuk setiap jamaah.</p></div>
+                </div>
+                <div class="faq-item glass rounded-2xl overflow-hidden border border-white/5">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
+                        <span class="text-white font-medium text-base md:text-lg">Apakah bisa pembayaran cicilan?</span>
+                        <i class="fas fa-plus faq-icon text-neon-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer"><p class="px-6 pb-6 text-gray-400 text-sm">SARAKSA Tour bekerja sama dengan berbagai bank untuk fasilitas pembiayaan 0% hingga 12 bulan. Silakan konsultasikan dengan tim marketing kami.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PREMIUM CTA ================= -->
+    <section class="py-32 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-neon-purple/20 to-transparent rounded-full blur-[80px]"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <div class="glass-gold max-w-4xl mx-auto p-8 md:p-16 rounded-[40px] border border-neon-gold/20 relative overflow-hidden" data-aos="zoom-in-up">
+                <div class="absolute -top-20 -right-20 w-60 h-60 bg-neon-gold/10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-neon-purple/10 rounded-full blur-3xl"></div>
+                <div class="relative z-10">
+                    <i class="fas fa-mosque text-neon-gold text-4xl md:text-5xl mb-6 float-anim"></i>
+                    <h2 class="font-display text-3xl md:text-6xl font-bold text-white mb-6 leading-tight">Saatnya Menjawab <br> Panggilan <span class="text-gradient-gold">Ilahi</span></h2>
+                    <p class="text-gray-300 max-w-xl mx-auto mb-10 text-base md:text-lg">Jangan tunda keberkahan. Konsultasikan rencana ibadah Anda bersama tim SARAKSA Tour sekarang.</p>
+                    <button onclick="openModal('modal-daftar-manasik')" class="ripple-btn bg-gradient-to-r from-neon-gold to-soft-gold text-space px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-base md:text-lg hover:scale-105 transition-transform glow-gold inline-flex items-center space-x-3">
+                        <span>Mulai Perjalanan</span> <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= MODERN FOOTER ================= -->
+    <footer class="bg-deep-purple border-t border-white/5 pt-24 pb-12 relative">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+                <div class="col-span-2 lg:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <img src="https://z-cdn-media.chatglm.cn/files/44e1eada-6c39-4f47-b04c-e25d8b179bbf.jpeg?auth_key=1882612062-a5629342849b4f4a9fecadb5b2e47e64-0-2bcc6c11cca9b620b673f41f9771208d" class="w-14 h-14 rounded-full border-2 border-neon-gold/50" alt="Logo Saraksa">
+                        <div><h1 class="font-display text-2xl font-bold text-white">SARAKSA</h1><p class="text-xs text-neon-gold tracking-[0.3em]">TOUR</p></div>
+                    </div>
+                    <p class="text-gray-400 max-w-sm leading-relaxed">Melayani dengan amanah, perjalanan nyaman penuh keberkahan. Warna adalah identitas, pelayanan adalah komitmen.</p>
+                    <div class="mt-8">
+                        <h4 class="text-white font-medium mb-4">Newsletter</h4>
+                        <form class="flex gap-2" onsubmit="event.preventDefault(); showToast(); this.reset();">
+                            <input type="email" placeholder="Email Anda" class="w-full bg-space border border-white/10 rounded-full px-5 py-3 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-neon-gold transition" required>
+                            <button type="submit" class="bg-neon-gold text-space px-5 py-3 rounded-full font-medium hover:scale-105 transition-transform flex items-center justify-center"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-medium mb-6">Navigasi</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#home" class="hover:text-neon-gold transition">Beranda</a></li>
+                        <li><a href="#program" class="hover:text-neon-gold transition">Program</a></li>
+                        <li><a href="#manasik" class="hover:text-neon-gold transition">Manasik</a></li>
+                        <li><a href="#struktur" class="hover:text-neon-gold transition">Tim Kami</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-medium mb-6">Layanan</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-neon-gold transition">Umroh Reguler</a></li>
+                        <li><a href="#" class="hover:text-neon-gold transition">Umroh Plus</a></li>
+                        <li><a href="#" class="hover:text-neon-gold transition">Haji Khusus</a></li>
+                        <li><button onclick="openModal('modal-buku')" class="hover:text-neon-gold transition">Buku Digital</button></li>
+                    </ul>
+                </div>
+                <div class="col-span-2 lg:col-span-1">
+                    <h4 class="text-white font-medium mb-6">Kontak</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li class="flex items-start space-x-3"><i class="fas fa-map-marker-alt text-neon-gold mt-1"></i><span>Jl. A.H. Nasution No. 105, Cipadung, Cibiru, Bandung</span></li>
+                        <li class="flex items-center space-x-3"><i class="fas fa-phone text-neon-gold"></i><span>0851-5058-8008</span></li>
+                        <li class="flex items-center space-x-3"><i class="fas fa-envelope text-neon-gold"></i><span>ppiukelompok@gmail.com</span></li>
+                    </ul>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center text-gray-400 hover:bg-neon-gold hover:text-space transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center text-gray-400 hover:bg-neon-gold hover:text-space transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center text-gray-400 hover:bg-neon-gold hover:text-space transition"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center text-gray-400 hover:bg-neon-gold hover:text-space transition"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2024 SARAKSA Tour. Crafted with Premium UX.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= MODALS (Pop-ups) ================= -->
+
+    <!-- Lightbox Modal -->
+    <div id="modal-lightbox" class="hidden fixed inset-0 z-[1000] bg-space/95 backdrop-blur-xl items-center justify-center p-4 cursor-none" onclick="closeModal('modal-lightbox')">
+        <img id="lightbox-img" src="" class="max-w-full max-h-[90vh] object-contain rounded-2xl glow-purple">
+    </div>
+
+    <!-- MANASIK DETAIL MODAL (PREMIUM INTERACTIVE BROCHURE) -->
+    <div id="modal-manasik-detail" class="hidden fixed inset-0 z-[1000] bg-space/80 backdrop-blur-xl items-center justify-center p-4">
+        <div class="glass-gold max-w-5xl w-full max-h-[90vh] overflow-y-auto modal-scroll rounded-3xl relative border border-neon-gold/30 p-8 md:p-12">
+            <button onclick="closeModal('modal-manasik-detail')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl z-10"><i class="fas fa-times"></i></button>
+            
+            <div class="text-center mb-10">
+                <span class="text-neon-gold text-xs tracking-widest font-medium">KURIKULUM TERPADU SARAKSA TOUR</span>
+                <h2 class="font-display text-3xl md:text-5xl font-bold text-white mt-2">Program <span class="text-gradient-gold">AMARTYA</span></h2>
+                <p class="text-gray-300 mt-2 italic">Amanah, Terpadu, dan Nyaman</p>
+            </div>
+
+            <div class="glass p-6 rounded-2xl mb-8 border border-white/10">
+                <h3 class="font-display text-xl md:text-2xl text-white mb-3 flex items-center"><i class="fas fa-info-circle text-neon-purple mr-3"></i> Latar Belakang</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Banyak calon jemaah—terutama pertama kali berangkat atau lanjut usia—sering kewalahan jika hanya diberi pembekalan teori ruangan. Saraksa Tour merancang program AMARTYA dengan metode <span class="text-neon-gold font-medium">micro-coaching</span> (pendampingan kelompok kecil) dan <span class="text-neon-gold font-medium">Sistem Kloter Kecil</span> untuk 120 jemaah (termasuk 30 lansia). 16 pertemuan ini menjadi ajang simulasi nyata (geladi resik) agar jemaah mandiri dan tenang di Tanah Suci.</p>
+            </div>
+
+            <h3 class="font-display text-xl md:text-2xl text-white mb-6 text-center">5 Tujuan Institusional</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+                <div class="glass p-5 rounded-xl hover:scale-105 transition-transform">
+                    <i class="fas fa-hand-holding-heart text-neon-gold text-xl mb-2"></i>
+                    <h4 class="text-white font-bold text-sm mb-1">Tujuan Institusional</h4>
+                    <p class="text-gray-400 text-xs">Menciptakan suasana ibadah tenang, jemaah didampingi sepenuh hati.</p>
+                </div>
+                <div class="glass p-5 rounded-xl hover:scale-105 transition-transform">
+                    <i class="fas fa-blind text-neon-gold text-xl mb-2"></i>
+                    <h4 class="text-white font-bold text-sm mb-1">Pendampingan Lansia</h4>
+                    <p class="text-gray-400 text-xs">Proteksi khusus 30 jemaah lansia sejak persiapan fisik hingga simulasi akhir.</p>
+                </div>
+                <div class="glass p-5 rounded-xl hover:scale-105 transition-transform">
+                    <i class="fas fa-book-reader text-neon-gold text-xl mb-2"></i>
+                    <h4 class="text-white font-bold text-sm mb-1">Edukasi Mudah Dipahami</h4>
+                    <p class="text-gray-400 text-xs">Materi fikih dan doa disampaikan sederhana, bermakna, dan berkesan.</p>
+                </div>
+                <div class="glass p-5 rounded-xl hover:scale-105 transition-transform">
+                    <i class="fas fa-route text-neon-gold text-xl mb-2"></i>
+                    <h4 class="text-white font-bold text-sm mb-1">Simulasi Alur Lapangan</h4>
+                    <p class="text-gray-400 text-xs">Sistem Manasik Arus Searah melatih kesiapan pergerakan massa padat.</p>
+                </div>
+                <div class="glass p-5 rounded-xl hover:scale-105 transition-transform">
+                    <i class="fas fa-balance-scale text-neon-gold text-xl mb-2"></i>
+                    <h4 class="text-white font-bold text-sm mb-1">Transparansi Manajemen</h4>
+                    <p class="text-gray-400 text-xs">Administrasi dokumen dan jadwal dikelola terbuka dan dapat dipertanggungjawabkan.</p>
+                </div>
+                <div class="glass p-5 rounded-xl flex items-center justify-center bg-gradient-to-br from-neon-purple/10 to-transparent">
+                    <div class="text-center">
+                        <i class="fas fa-map-marker-alt text-neon-gold text-xl mb-2"></i>
+                        <h4 class="text-white font-bold text-sm">Lokasi Simulasi</h4>
+                        <p class="text-gray-400 text-xs">Plaza Haji Al Qosbah Gedebage</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="font-display text-xl md:text-2xl text-white mb-6 text-center">Matriks 16 Pertemuan Manasik</h3>
+            <div class="space-y-3 mb-10">
+                <div class="faq-item glass rounded-xl overflow-hidden border border-white/5">
+                    <button class="faq-toggle w-full flex justify-between items-center p-5 text-left">
+                        <span class="text-white font-medium text-sm md:text-base">Fase 1: Fondasi Regulasi, Administrasi & Orientasi (Pertemuan 1-3)</span>
+                        <i class="fas fa-plus faq-icon text-neon-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="p-5 pt-0 text-gray-400 text-sm space-y-3">
+                            <p><strong class="text-neon-gold">1. Orientasi AMARTYA:</strong> Pengenalan profil, identifikasi 30 lansia, pembentukan 10 regu taktis.</p>
+                            <p><strong class="text-neon-gold">2. Regulasi Umrah:</strong> Hak-kewajiban, hukum perlindungan konsumen, aturan keimigrasian. Distribusi Buku Saku AMARTYA.</p>
+                            <p><strong class="text-neon-gold">3. Manajemen Dokumen:</strong> Pengecekan paspor, visa, berkas kesehatan, validasi manifest hotel/pesawat.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item glass rounded-xl overflow-hidden border border-white/5">
+                    <button class="faq-toggle w-full flex justify-between items-center p-5 text-left">
+                        <span class="text-white font-medium text-sm md:text-base">Fase 2: Pendalaman Teori Fikih & Mental (Pertemuan 4-7)</span>
+                        <i class="fas fa-plus faq-icon text-neon-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="p-5 pt-0 text-gray-400 text-sm space-y-3">
+                            <p><strong class="text-neon-gold">4. Fikih Umrah I:</strong> Niat di Miqat, tata cara Thawaf, Sa'i, dan Tahallul yang sah.</p>
+                            <p><strong class="text-neon-gold">5. Fikih Umrah II:</strong> Larangan ihram, Dam (denda), rukhshah (keringanan) bagi lansia/wanita.</p>
+                            <p><strong class="text-neon-gold">6. Doa Utama:</strong> Lafal Talbiyah, doa Masjidil Haram, Thawaf, dan Sa'i secara fasih.</p>
+                            <p><strong class="text-neon-gold">7. Kesiagaan Medis:</strong> Edukasi dehidrasi, manajemen stres, olahraga mandiri pra-praktik berat.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item glass rounded-xl overflow-hidden border border-white/5">
+                    <button class="faq-toggle w-full flex justify-between items-center p-5 text-left">
+                        <span class="text-white font-medium text-sm md:text-base">Fase 3: Simulasi Teknis Lapangan Parsial (Pertemuan 8-11)</span>
+                        <i class="fas fa-plus faq-icon text-neon-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="p-5 pt-0 text-gray-400 text-sm space-y-3">
+                            <p><strong class="text-neon-gold">8. Workshop Kain Ihram:</strong> Praktik melipat/mengunci ihram pria, adab pakaian wanita.</p>
+                            <p><strong class="text-neon-gold">9. Simulasi I (Miqat & Thawaf):</strong> Niat ihram, Thawaf melingkari replika Ka'bah. Uji coba Manasik Arus Searah.</p>
+                            <p><strong class="text-neon-gold">10. Simulasi II (Sa'i & Tahallul):</strong> Rute Sofa-Marwah, teknik hemat energi lansia, Check-Point Kebugaran.</p>
+                            <p><strong class="text-neon-gold">11. Penerbangan & Hotel:</strong> Tayamum di kursi, shalat di pesawat, simulasi kartu kamar hotel.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item glass rounded-xl overflow-hidden border border-white/5">
+                    <button class="faq-toggle w-full flex justify-between items-center p-5 text-left">
+                        <span class="text-white font-medium text-sm md:text-base">Fase 4: Simulasi Akbar & Evaluasi (Pertemuan 12-16)</span>
+                        <i class="fas fa-plus faq-icon text-neon-gold transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="p-5 pt-0 text-gray-400 text-sm space-y-3">
+                            <p><strong class="text-neon-gold">12. Geladi Resik Kloter 1:</strong> Simulasi utuh untuk Regu 1-5 (60 jemaah). Uji Sistem Kloter Kecil.</p>
+                            <p><strong class="text-neon-gold">13. Geladi Resik Kloter 2:</strong> Simulasi utuh untuk Regu 6-10. Pengondisian stiker Kartu Prioritas Kuning.</p>
+                            <p><strong class="text-neon-gold">14. Uji Kompetensi:</strong> Sampling acak oleh Muthawif. Terbitnya Dokumen Lembar Hasil Evaluasi.</p>
+                            <p><strong class="text-neon-gold">15. Pemantapan Akhir:</strong> Micro-coaching "jemput bola" via Pos Edukasi Portable & share audio WA.</p>
+                            <p><strong class="text-neon-gold">16. Walimatussafar:</strong> Pelepasan resmi, doa selamat, distribusi koper dan paspor final.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="font-display text-xl md:text-2xl text-white mb-6 text-center">Susunan Panitia PPIU</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="glass p-5 rounded-xl flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-gold to-soft-gold flex items-center justify-center font-bold text-space text-lg">R</div>
+                    <div><h4 class="text-white font-semibold text-sm">Rizal Kastawibawa</h4><p class="text-gray-400 text-xs">Direktur Operasional / PJ</p></div>
+                </div>
+                <div class="glass p-5 rounded-xl flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-purple to-royal-purple flex items-center justify-center font-bold text-white text-lg">D</div>
+                    <div><h4 class="text-white font-semibold text-sm">Diva Shaffira I.K.</h4><p class="text-gray-400 text-xs">Administrasi & Kesekretariatan</p></div>
+                </div>
+                <div class="glass p-5 rounded-xl flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-purple to-royal-purple flex items-center justify-center font-bold text-white text-lg">R</div>
+                    <div><h4 class="text-white font-semibold text-sm">Rabiansyah Akbar</h4><p class="text-gray-400 text-xs">Koordinator Muthawif</p></div>
+                </div>
+                <div class="glass p-5 rounded-xl flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-gold to-soft-gold flex items-center justify-center font-bold text-space text-lg">E</div>
+                    <div><h4 class="text-white font-semibold text-sm">Euis Siti Suwangsih</h4><p class="text-gray-400 text-xs">Kesehatan & Manajemen Risiko</p></div>
+                </div>
+                <div class="glass p-5 rounded-xl flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-purple to-royal-purple flex items-center justify-center font-bold text-white text-lg">F</div>
+                    <div><h4 class="text-white font-semibold text-sm">Fiqri Syaukani</h4><p class="text-gray-400 text-xs">Logistik, Perlengkapan & Keamanan</p></div>
+                </div>
+                <div class="glass-gold p-5 rounded-xl flex items-center justify-center text-center">
+                    <div><i class="fas fa-quote-left text-neon-gold mb-2"></i><p class="text-gray-300 text-xs italic">"Melayani Dengan Amanah, Perjalanan Nyaman Penuh Keberkahan."</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Daftar Manasik Modal -->
+    <div id="modal-daftar-manasik" class="hidden fixed inset-0 z-[1000] bg-space/80 backdrop-blur-xl items-center justify-center p-4">
+        <div class="glass-gold max-w-lg w-full p-8 md:p-10 rounded-3xl relative overflow-hidden border border-neon-gold/30">
+            <button onclick="closeModal('modal-daftar-manasik')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+            <div class="text-center mb-8">
+                <div class="bg-gradient-to-br from-neon-purple to-royal-purple text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl glow-purple"><i class="fas fa-user-plus"></i></div>
+                <h3 class="font-display text-2xl md:text-3xl font-bold text-white">Daftar Program Manasik</h3>
+                <p class="text-gray-300 text-sm mt-2">Isi data diri Anda, tim kami akan menghubungi segera.</p>
+            </div>
+            <form class="space-y-4" onsubmit="event.preventDefault(); closeModal('modal-daftar-manasik'); showToast(); this.reset();">
+                <input type="text" required placeholder="Nama Lengkap" class="w-full bg-space border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-neon-gold transition">
+                <input type="number" required placeholder="No. WhatsApp" class="w-full bg-space border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-neon-gold transition">
+                <select required class="w-full bg-space border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-gold transition">
+                    <option value="" disabled selected>Pilih Program</option>
+                    <option>Umroh Reguler</option>
+                    <option>Umroh Plus Turki</option>
+                    <option>Umroh Private VIP</option>
+                </select>
+                <button type="submit" class="w-full bg-gradient-to-r from-neon-gold to-soft-gold text-space py-4 rounded-xl font-bold hover:scale-[1.02] transition-transform glow-gold">Kirim Pendaftaran</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Jadwal Manasik Modal -->
+    <div id="modal-jadwal-manasik" class="hidden fixed inset-0 z-[1000] bg-space/80 backdrop-blur-xl items-center justify-center p-4">
+        <div class="glass max-w-2xl w-full p-8 md:p-10 rounded-3xl relative overflow-hidden border border-white/10">
+            <button onclick="closeModal('modal-jadwal-manasik')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+            <h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-6">Jadwal Keberangkatan</h3>
+            <div class="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+                <div class="glass-gold p-5 rounded-2xl flex justify-between items-center hover:scale-[1.01] transition">
+                    <div><h4 class="text-white font-semibold text-base md:text-lg">Batch Ramadhan 2024</h4><p class="text-gray-300 text-sm"><i class="far fa-calendar mr-1"></i> 1 Maret 2024</p></div>
+                    <span class="bg-red-500/20 text-red-400 text-xs font-bold px-3 py-1 rounded-full">Penuh</span>
+                </div>
+                <div class="glass p-5 rounded-2xl flex justify-between items-center hover:scale-[1.01] transition">
+                    <div><h4 class="text-white font-semibold text-base md:text-lg">Umroh Plus Turki</h4><p class="text-gray-300 text-sm"><i class="far fa-calendar mr-1"></i> 10 April 2024</p></div>
+                    <span class="bg-green-500/20 text-green-400 text-xs font-bold px-3 py-1 rounded-full">Tersedia</span>
+                </div>
+                <div class="glass p-5 rounded-2xl flex justify-between items-center hover:scale-[1.01] transition">
+                    <div><h4 class="text-white font-semibold text-base md:text-lg">Umroh Reguler Akhir Tahun</h4><p class="text-gray-300 text-sm"><i class="far fa-calendar mr-1"></i> 15 Desember 2024</p></div>
+                    <span class="bg-green-500/20 text-green-400 text-xs font-bold px-3 py-1 rounded-full">Tersedia</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buku Digital Modal -->
+    <div id="modal-buku" class="hidden fixed inset-0 z-[1000] bg-space/80 backdrop-blur-xl items-center justify-center p-4">
+        <div class="glass max-w-lg w-full p-8 md:p-10 rounded-3xl relative border border-white/10">
+            <button onclick="closeModal('modal-buku')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+            <div class="text-center mb-8">
+                <i class="fas fa-book-open text-neon-gold text-5xl mb-4"></i>
+                <h3 class="font-display text-2xl md:text-3xl font-bold text-white">Buku Bimbingan Digital</h3>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="glass-gold p-6 rounded-2xl text-center cursor-pointer hover:scale-105 transition" onclick="showToast()">
+                    <i class="fas fa-file-pdf text-red-400 text-4xl mb-3"></i>
+                    <h4 class="text-white font-semibold text-sm md:text-base">Panduan Umroh</h4>
+                    <button class="mt-3 text-xs bg-neon-gold text-space px-4 py-1 rounded-full">Unduh PDF</button>
+                </div>
+                <div class="glass-gold p-6 rounded-2xl text-center cursor-pointer hover:scale-105 transition" onclick="showToast()">
+                    <i class="fas fa-file-pdf text-yellow-400 text-4xl mb-3"></i>
+                    <h4 class="text-white font-semibold text-sm md:text-base">Doa & Zikir</h4>
+                    <button class="mt-3 text-xs bg-neon-gold text-space px-4 py-1 rounded-full">Unduh PDF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Survei Modal -->
+    <div id="modal-survei" class="hidden fixed inset-0 z-[1000] bg-space/80 backdrop-blur-xl items-center justify-center p-4">
+        <div class="glass max-w-md w-full p-8 md:p-10 rounded-3xl relative border border-white/10">
+            <button onclick="closeModal('modal-survei')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+            <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-2 text-center">Survei Kepuasan</h3>
+            <p class="text-gray-300 text-sm text-center mb-6">Penilaian Anda sangat berarti</p>
+            <div class="space-y-4">
+                <div class="text-center">
+                    <p class="text-gray-400 text-sm mb-2">Pelayanan Tim</p>
+                    <div class="flex justify-center space-x-2 text-2xl text-gray-600">
+                        <i class="fas fa-star hover:text-neon-gold cursor-pointer transition" onclick="rateStar(this)"></i>
+                        <i class="fas fa-star hover:text-neon-gold cursor-pointer transition" onclick="rateStar(this)"></i>
+                        <i class="fas fa-star hover:text-neon-gold cursor-pointer transition" onclick="rateStar(this)"></i>
+                        <i class="fas fa-star hover:text-neon-gold cursor-pointer transition" onclick="rateStar(this)"></i>
+                        <i class="fas fa-star hover:text-neon-gold cursor-pointer transition" onclick="rateStar(this)"></i>
+                    </div>
+                </div>
+                <textarea placeholder="Kritik & Saran..." class="w-full bg-space border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-neon-gold transition" rows="3"></textarea>
+                <button onclick="closeModal('modal-survei'); showToast();" class="w-full bg-gradient-to-r from-neon-purple to-royal-purple text-white py-3 rounded-xl font-bold hover:scale-[1.02] transition-transform">Kirim Survei</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Contact Modal -->
+    <div id="modal-quick-contact" class="hidden fixed inset-0 z-[1000] bg-space/80 backdrop-blur-xl items-center justify-center p-4">
+        <div class="glass max-w-md w-full p-8 md:p-10 rounded-3xl relative border border-white/10">
+            <button onclick="closeModal('modal-quick-contact')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+            <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-6 text-center">Quick Contact</h3>
+            <div class="space-y-3">
+                <a href="https://wa.me/6285150588008" class="w-full bg-green-500/10 border border-green-500/30 text-green-400 py-4 rounded-xl font-medium hover:bg-green-500/20 transition flex items-center justify-center space-x-2">
+                    <i class="fab fa-whatsapp text-xl"></i> <span>Chat via WhatsApp</span>
+                </a>
+                <a href="tel:+6285150588008" class="w-full bg-blue-500/10 border border-blue-500/30 text-blue-400 py-4 rounded-xl font-medium hover:bg-blue-500/20 transition flex items-center justify-center space-x-2">
+                    <i class="fas fa-phone text-xl"></i> <span>Telepon Kami</span>
+                </a>
+                <a href="mailto:ppiukelompok@gmail.com" class="w-full bg-purple-500/10 border border-purple-500/30 text-purple-400 py-4 rounded-xl font-medium hover:bg-purple-500/20 transition flex items-center justify-center space-x-2">
+                    <i class="fas fa-envelope text-xl"></i> <span>Kirim Email</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SCRIPTS ================= -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => preloader.style.display = 'none', 500);
+            setTimeout(() => openModal('welcome-popup'), 1000);
+        });
+
+        // Lenis Smooth Scroll
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // AOS Init
+        AOS.init({ once: true, offset: 50 });
+
+        // Swiper Init
+        new Swiper('.testimonialSwiper', {
+            effect: 'coverflow', grabCursor: true, centeredSlides: true, slidesPerView: 1, spaceBetween: 30, loop: true,
+            autoplay: { delay: 4000, disableOnInteraction: false },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+        });
+
+        // Custom Cursor
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX; const posY = e.clientY;
+            cursorDot.style.left = `${posX}px`; cursorDot.style.top = `${posY}px`;
+            cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: 'forwards' });
+        });
+        document.querySelectorAll('button, a, .cursor-pointer').forEach(el => {
+            el.addEventListener('mouseenter', () => cursorOutline.classList.add('cursor-grow'));
+            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('cursor-grow'));
+        });
+
+        // Navbar Scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { navbar.classList.add('glass', 'py-2'); navbar.classList.remove('py-4'); } 
+            else { navbar.classList.remove('glass', 'py-2'); navbar.classList.add('py-4'); }
+            const backTop = document.getElementById('back-to-top');
+            if (window.scrollY > 300) { backTop.classList.remove('opacity-0', 'invisible'); backTop.classList.add('opacity-100', 'visible'); } 
+            else { backTop.classList.add('opacity-0', 'invisible'); backTop.classList.remove('opacity-100', 'visible'); }
+        });
+        document.getElementById('back-to-top').addEventListener('click', () => lenis.scrollTo(0));
+
+        // Mobile Menu
+        document.getElementById('menu-btn').addEventListener('click', () => document.getElementById('mobile-menu').classList.toggle('hidden'));
+
+        // Modal Functions
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove('hidden'); modal.classList.add('flex');
+            document.body.style.overflow = 'hidden'; lenis.stop();
+        }
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.add('hidden'); modal.classList.remove('flex');
+            document.body.style.overflow = 'auto'; lenis.start();
+            if(id === 'modal-manasik-detail') {
+                document.querySelectorAll('#modal-manasik-detail .faq-item').forEach(item => item.classList.remove('active'));
+            }
+        }
+        window.addEventListener('click', (e) => { if (e.target.classList.contains('modal')) closeModal(e.target.id); });
+
+        // Toast
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('opacity-0', 'translate-y-10');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            setTimeout(() => { toast.classList.add('opacity-0', 'translate-y-10'); toast.classList.remove('opacity-100', 'translate-y-0'); }, 3000);
+        }
+
+        // Ripple
+        document.querySelectorAll('.ripple-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const x = e.clientX - e.target.offsetLeft; const y = e.clientY - e.target.offsetTop;
+                const ripple = document.createElement('span'); ripple.className = 'ripple-effect';
+                ripple.style.left = `${x}px`; ripple.style.top = `${y}px`;
+                this.appendChild(ripple); setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Counter
+        const counters = document.querySelectorAll('.counter');
+        const animateCounter = (counter) => {
+            const target = +counter.getAttribute('data-target');
+            const updateCount = () => {
+                const current = +counter.innerText; const inc = target / 200;
+                if (current < target) { counter.innerText = Math.ceil(current + inc); setTimeout(updateCount, 10); } 
+                else { counter.innerText = target + (target > 100 ? '+' : ''); }
+            };
+            updateCount();
+        };
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { animateCounter(entry.target); observer.unobserve(entry.target); } });
+        }, { threshold: 0.5 });
+        counters.forEach(c => counterObserver.observe(c));
+
+        // Accordion
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const container = item.parentElement;
+                container.querySelectorAll('.faq-item').forEach(otherItem => {
+                    if (otherItem !== item) otherItem.classList.remove('active');
+                });
+                item.classList.toggle('active');
+            });
+        });
+
+        // Parallax
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2; const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            document.querySelectorAll('[data-parallax]').forEach(el => {
+                const speed = parseFloat(el.getAttribute('data-parallax'));
+                el.style.transform = `translate(${x * speed * 20}px, ${y * speed * 20}px)`;
+            });
+        });
+
+        // Lightbox
+        function openLightbox(src) { document.getElementById('lightbox-img').src = src; openModal('modal-lightbox'); }
+
+        // Rating
+        function rateStar(el) {
+            const stars = el.parentElement.querySelectorAll('i');
+            const index = Array.from(stars).indexOf(el);
+            stars.forEach((star, i) => {
+                if (i <= index) { star.classList.remove('text-gray-600'); star.classList.add('text-neon-gold'); } 
+                else { star.classList.remove('text-neon-gold'); star.classList.add('text-gray-600'); }
+            });
+        }
+
+        // Exit Intent
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY < 0 && !sessionStorage.getItem('exitShown')) {
+                sessionStorage.setItem('exitShown', 'true');
+                openModal('modal-quick-contact');
+            }
+        });
+    </script>
+</body>
+</html>
